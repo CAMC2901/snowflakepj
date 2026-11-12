@@ -1,0 +1,8 @@
+ID,CASE_ID,EVENT_TYPE,ACTOR,ACTOR_ROLE,DESCRIPTION,CREATED_AT
+1,1,CREACION,Agente_LangGraph,SISTEMA_IA,Solicitud interpretada y clasificada automáticamente como Alumbrado Público.,2026-11-11 10:04:32
+2,1,ASIGNACION,Agente_LangGraph,SISTEMA_IA,Caso enrutado a K-YENA SAS con SLA operativo de 72 horas.,2026-11-11 10:04:32
+3,3,ESCALAMIENTO,Agente_LangGraph,SISTEMA_IA,Caso escalado a funcionario humano: cobro tributario y revisión de soporte bancario.,2026-11-11 10:04:32
+4,4,CREACION_SIMULADA,Agente_LangGraph,AGENTE_IA,Caso generado en entorno sandbox con radicado provisional BQL-2026-1004.,2026-11-11 10:37:32
+5,5,CREACION_SIMULADA,Agente_LangGraph,AGENTE_IA,Caso generado en entorno sandbox con radicado provisional BQL-2026-1005.,2026-11-11 10:38:24
+6,6,CREACION_SIMULADA,Agente_LangGraph,AGENTE_IA,Caso generado en entorno sandbox con radicado provisional BQL-2026-1006.,2026-11-11 11:23:02
+7,6,APROBACION_HUMANA,TEST_SUPERVISOR_01,FUNCIONARIO_PUBLICO,Clasificación y direccionamiento avalados por el funcionario TEST_SUPERVISOR_01. Aprobación verificada en suite de pruebas automáticas.,2026-11-11 11:23:02

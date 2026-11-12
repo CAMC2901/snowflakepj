@@ -1,0 +1,69 @@
+# =====================================================================
+# ALCALDÍA DISTRITAL DE BARRANQUILLA — REPOSITORIO GIT
+# Archivo .gitignore para protección de credenciales y archivos locales
+# =====================================================================
+
+# Credenciales y Secretos (NUNCA SUBIR A GIT)
+.env
+*.env
+!.env.example
+backend/.env
+frontend/.env
+*.env.local
+
+# Entornos Virtuales y Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+
+# Dependencias y Bundles de Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.turbo
+
+# Bases de Datos Locales y Archivos Binarios
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+data_barranquilla.db
+
+# Registros y Logs del Sistema
+*.log
+logs/
+
+# Editores y Entornos de Desarrollo
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini

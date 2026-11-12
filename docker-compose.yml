@@ -1,0 +1,75 @@
+services:
+  # ---------------------------------------------------------------------------
+  # Servicio 1: Contenedor Unificado del Agente Ciudadano (FastAPI + React + LangGraph)
+  # ---------------------------------------------------------------------------
+  barranquilla-agente:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: barranquilla-agente-ciudadano
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_NAME=Agente de Gestión Ciudadana - Alcaldía de Barranquilla
+      - APP_ENV=production
+      - HOST=0.0.0.0
+      - PORT=8000
+      # Inteligencia Artificial (Groq Cloud ultrarrápido + Ollama local $0)
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - GROQ_MODEL=${GROQ_MODEL:-openai/gpt-oss-120b}
+      - OLLAMA_BASE_URL=http://barranquilla-ollama:11434
+      - LLM_MODEL=${LLM_MODEL:-qwen2.5:0.5b}
+      - LLM_FALLBACK_MODEL=${LLM_FALLBACK_MODEL:-llama3:latest}
+      - EMBEDDING_MODEL=nomic-embed-text
+      # Base de Datos Relacional y Vectorial SQLite
+      - DATABASE_URL=sqlite:////app/data_barranquilla.db
+      # Conexión Snowflake MCP (Principio de Menor Privilegio)
+      - SNOWFLAKE_READY=${SNOWFLAKE_READY:-true}
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT:-PIHDEYB-PR83338}
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER:-BQL_MCP_READER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD:-}
+      - SNOWFLAKE_DATABASE=${SNOWFLAKE_DATABASE:-BARRANQUILLA_CITIZEN_DB}
+      - SNOWFLAKE_SCHEMA=${SNOWFLAKE_SCHEMA:-OPERATIONS}
+      - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE:-COMPUTE_WH}
+      # Parámetros Operativos y Salvaguardas
+      - MAX_RAG_RESULTS=4
+      - CONFIDENCE_THRESHOLD=0.70
+      - SANDBOX_MODE=true
+    volumes:
+      - app-database:/app
+    depends_on:
+      barranquilla-ollama:
+        condition: service_healthy
+    networks:
+      - barranquilla-net
+
+  # ---------------------------------------------------------------------------
+  # Servicio 2: Motor de Inferencia y Embeddings Local (Ollama $0 Offline)
+  # ---------------------------------------------------------------------------
+  barranquilla-ollama:
+    image: ollama/ollama:latest
+    container_name: barranquilla-ollama-local
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - barranquilla-net
+
+volumes:
+  app-database:
+    driver: local
+  ollama-models:
+    driver: local
+
+networks:
+  barranquilla-net:
+    driver: bridge

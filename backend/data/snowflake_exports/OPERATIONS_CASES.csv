@@ -1,0 +1,7 @@
+ID,RADICADO,CITIZEN_NAME,CITIZEN_PHONE,CATEGORY,TITLE,STATUS,PRIORITY,ASSIGNED_TO,SLA_DUE_DATE,CREATED_AT
+1,BQL-2026-00101,Ana Sofía Polo,3004567890,Alumbrado Público,Luminaria apagada intermitente en esquina residencial,EN_GESTION,MEDIA,Agente Inteligente Barranquilla,2026-11-13 10:04:32,2026-11-10 10:04:32
+2,BQL-2026-00102,José David Martínez,3102345678,Espacio Público,Ocupación indebida de andén peatonal con taller mecánico informal,PENDIENTE_REVISION,ALTA,Agente Inteligente Barranquilla,2026-11-18 10:04:32,2026-11-10 20:04:32
+3,BQL-2026-00103,Marta Cecilia Osorio,3019876543,Hacienda Distrital,Solicitud de revisión por cobro duplicado en factura de impuesto predial,ESCALADO_HUMANO,ALTA,Agente Inteligente Barranquilla,2026-11-23 10:04:32,2026-11-09 10:04:32
+4,BQL-2026-1004,Ciudadano Barranquillero,3001234567,Alumbrado Público,Reporte de Alumbrado Público en Alto Prado,RADICADO_SIMULADO,MEDIA,Concesión de Alumbrado Público / K-YENA,2026-11-14 10:37:32,2026-11-11 10:37:32
+5,BQL-2026-1005,Ciudadano Solicitante,,Peticiones y Atención General,Caso escalado: Activación de salvaguarda de gobernanza por término sensible,ESCALADO_HUMANO,ALTA,Secretaría General - Ventanilla Única PQRSD,2026-11-16 10:38:24,2026-11-11 10:38:24
+6,BQL-2026-1006,Ciudadano Barranquillero,3015557788,Alumbrado Público,Reporte de Alumbrado Público en Boston,EN_GESTION,MEDIA,Concesión de Alumbrado Público / K-YENA,2026-11-14 11:23:02,2026-11-11 11:23:02
