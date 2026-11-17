@@ -14,6 +14,7 @@ class AgentState(TypedDict):
     extracted_entities: Dict[str, Any]
     intent: str # CONSULTA, RADICACION, CONSULTA_ESTADO, ANALITICA, ESCALAMIENTO
     plan: List[str]
+    task_policy: Dict[str, Any]
     current_step: int
     search_results: List[Dict[str, Any]]
     classification: Dict[str, Any]

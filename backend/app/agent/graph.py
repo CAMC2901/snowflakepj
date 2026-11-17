@@ -7,6 +7,7 @@ from langgraph.graph import StateGraph, START, END
 
 from backend.app.agent.state import AgentState, AgentThought
 from backend.app.agent.llm_client import llm_client
+from backend.app.agent.task_policy import build_task_policy
 from backend.app.tools.search_knowledge import tool_search_knowledge
 from backend.app.tools.classify_request import tool_classify_request
 from backend.app.tools.validate_required_fields import tool_validate_required_fields
@@ -198,6 +199,11 @@ def interpret_node(state: AgentState) -> AgentState:
 
 def plan_node(state: AgentState) -> AgentState:
     intent = state.get("intent", "CONSULTA")
+    state["task_policy"] = build_task_policy(intent, state.get("requires_human_approval", False))
+    add_thought(
+        state, "Priorización de tareas", "Aplicando matriz esfuerzo–impacto",
+        state["task_policy"]["presentation"]["text"]
+    )
     add_thought(state, "Plan de Atención", "Estableciendo pasos de atención oficial", f"Organizando flujo para {intent}")
     
     if intent == "FUERA_DE_ALCANCE":

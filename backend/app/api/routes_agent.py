@@ -4,6 +4,7 @@ from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
 from backend.app.core.database import get_db, AccessAudit
 from backend.app.agent.graph import citizen_agent_graph
+from backend.app.agent.task_policy import build_task_policy
 
 router = APIRouter(prefix="/agent", tags=["Agente"])
 
@@ -22,6 +23,11 @@ class ChatResponse(BaseModel):
     citations: List[Dict[str, Any]] = []
     thoughts: List[Dict[str, Any]] = []
     requires_human_approval: bool = False
+    task_policy: Optional[Dict[str, Any]] = None
+
+@router.get("/task_policy")
+async def get_task_policy():
+    return build_task_policy()
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat_with_agent(req: ChatRequest, db: Session = Depends(get_db)):
@@ -45,6 +51,7 @@ async def chat_with_agent(req: ChatRequest, db: Session = Depends(get_db)):
         "extracted_entities": {},
         "intent": "",
         "plan": [],
+        "task_policy": {},
         "current_step": 0,
         "search_results": [],
         "classification": {},
@@ -70,7 +77,8 @@ async def chat_with_agent(req: ChatRequest, db: Session = Depends(get_db)):
             validation=final_state.get("validation"),
             citations=final_state.get("citations", []),
             thoughts=final_state.get("agent_thoughts", []),
-            requires_human_approval=final_state.get("requires_human_approval", False)
+            requires_human_approval=final_state.get("requires_human_approval", False),
+            task_policy=final_state.get("task_policy")
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en la ejecución del grafo multiagente: {str(e)}")
